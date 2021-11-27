@@ -1,0 +1,20 @@
+{
+    "name": "dict-operations",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "tsc",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/DanielKRing1/DictOperations.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/DanielKRing1/DictOperations/issues"
+    },
+    "homepage": "https://github.com/DanielKRing1/DictOperations#readme"
+}
