@@ -1,3 +1,5 @@
+import { Dict } from "./types";
+
 // MODIFICATION OPERATIONS
 
 export function filterDict<T>(originalDict: Dict<T>, conditionToPass: (key: string, value: T) => boolean): Dict<T> {

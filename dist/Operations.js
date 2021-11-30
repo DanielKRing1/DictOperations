@@ -1,7 +1,7 @@
 "use strict";
-// MODIFICATION OPERATIONS
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getIntersectingDictKeys = exports.avgDicts = exports.multiplyDicts = exports.multiplyDictScalar = exports.sumDicts = exports.sumDictScalar = exports.divideDicts = exports.divideScalarDict = exports.divideDictScalar = exports.subDicts = exports.subScalarDict = exports.subDictScalar = exports.copyDictKeep = exports.copyDictRm = exports.mutateDict = exports.filterDict = void 0;
+// MODIFICATION OPERATIONS
 function filterDict(originalDict, conditionToPass) {
     var filteredDict = {};
     for (var key in originalDict) {
