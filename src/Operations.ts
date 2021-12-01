@@ -2,7 +2,7 @@ import { Dict } from "./types";
 
 // MODIFICATION OPERATIONS
 
-export function filterDict<T>(originalDict: Dict<T>, conditionToPass: (key: string, value: T) => boolean): Dict<T> {
+function filterDict<T>(originalDict: Dict<T>, conditionToPass: (key: string, value: T) => boolean): Dict<T> {
   const filteredDict: Dict<T> = {};
 
   for (const key in originalDict) {
@@ -14,7 +14,7 @@ export function filterDict<T>(originalDict: Dict<T>, conditionToPass: (key: stri
   return filteredDict;
 }
 
-export function mutateDict<T>(originalDict: Dict<T>, mutate: (key: string, value: T) => T): Dict<T> {
+function mutateDict<T>(originalDict: Dict<T>, mutate: (key: string, value: T) => T): Dict<T> {
   const mutatedDict: Dict<T> = {};
 
   for (const key in originalDict) {
@@ -29,22 +29,22 @@ export function mutateDict<T>(originalDict: Dict<T>, mutate: (key: string, value
 
 // COPY OPERATIONS
 
-export function copyDictRm<T>(originalDict: Dict<T>, blacklistKeys: string[]): Dict<T> {
+function copyDictRm<T>(originalDict: Dict<T>, blacklistKeys: string[]): Dict<T> {
   return filterDict<T>(originalDict, (key: string, value: T) => !blacklistKeys.includes(key));
 }
 
-export function copyDictKeep<T>(originalDict: Dict<T>, whitelistKeys: string[]): Dict<T> {
+function copyDictKeep<T>(originalDict: Dict<T>, whitelistKeys: string[]): Dict<T> {
   return filterDict<T>(originalDict, (key: string, value: T) => whitelistKeys.includes(key));
 }
 
 // OPERATOR OPERATIONS
 
 // Subtraction
-export function subDictScalar(dict: Dict<number>, scalar: number): Dict<number> {
+function subDictScalar(dict: Dict<number>, scalar: number): Dict<number> {
   return mutateDict<number>(dict, (key: string, value: number) => value - scalar);
 }
 
-export function subScalarDict(scalar: number, dict: Dict<number>): Dict<number> {
+function subScalarDict(scalar: number, dict: Dict<number>): Dict<number> {
   return mutateDict<number>(dict, (key: string, value: number) => scalar - value);
 }
 
@@ -53,7 +53,7 @@ export function subScalarDict(scalar: number, dict: Dict<number>): Dict<number> 
  *
  * @param dicts Array of Dictionaries attributes to be summed up into a single Dictionary
  */
-export function subDicts(...dicts: Dict<number>[]): Dict<number> {
+function subDicts(...dicts: Dict<number>[]): Dict<number> {
   // 1. Init to first dict
   const minuendDict: Dict<number> = Object.assign({}, dicts[0]);
 
@@ -71,15 +71,15 @@ export function subDicts(...dicts: Dict<number>[]): Dict<number> {
 }
 
 // Division
-export function divideDictScalar(dict: Dict<number>, scalar: number): Dict<number> {
+function divideDictScalar(dict: Dict<number>, scalar: number): Dict<number> {
   return mutateDict<number>(dict, (key: string, value: number) => value / scalar);
 }
 
-export function divideScalarDict(scalar: number, dict: Dict<number>): Dict<number> {
+function divideScalarDict(scalar: number, dict: Dict<number>): Dict<number> {
   return mutateDict<number>(dict, (key: string, value: number) => scalar / value);
 }
 
-export function divideDicts(a: Dict<number>, b: Dict<number>): Dict<number> {
+function divideDicts(a: Dict<number>, b: Dict<number>): Dict<number> {
   const keysToDivideOn: string[] = getIntersectingDictKeys(a, b);
   const dividedDict: Dict<number> = {};
 
@@ -92,7 +92,7 @@ export function divideDicts(a: Dict<number>, b: Dict<number>): Dict<number> {
 
 // Addition
 
-export function sumDictScalar(dict: Dict<number>, scalar: number): Dict<number> {
+function sumDictScalar(dict: Dict<number>, scalar: number): Dict<number> {
   const newDict: Dict<number> = {};
   return mutateDict<number>(dict, (key: string, value: number) => value + scalar);
 }
@@ -102,7 +102,7 @@ export function sumDictScalar(dict: Dict<number>, scalar: number): Dict<number> 
  *
  * @param dicts Array of Dictionaries attributes to be summed up into a single Dictionary
  */
-export function sumDicts(...dicts: Dict<number>[]): Dict<number> {
+function sumDicts(...dicts: Dict<number>[]): Dict<number> {
   const summedDict: Dict<number> = {};
 
   for (const dict of dicts) {
@@ -119,11 +119,11 @@ export function sumDicts(...dicts: Dict<number>[]): Dict<number> {
 
 // Multiplication
 
-export function multiplyDictScalar(dict: Dict<number>, scalar: number): Dict<number> {
+function multiplyDictScalar(dict: Dict<number>, scalar: number): Dict<number> {
   return mutateDict<number>(dict, (key: string, value: number) => value * scalar);
 }
 
-export function multiplyDicts(a: Dict<number>, b: Dict<number>): Dict<number> {
+function multiplyDicts(a: Dict<number>, b: Dict<number>): Dict<number> {
   const keysToDivideOn: string[] = getIntersectingDictKeys(a, b);
   const multipliedDict: Dict<number> = {};
 
@@ -141,7 +141,7 @@ export function multiplyDicts(a: Dict<number>, b: Dict<number>): Dict<number> {
  *
  * @param dicts Array of Dictionaries attributes to be averaged up into a single Dictionary
  */
-export function avgDicts(getAvg: (sum: number, count: number) => number, ...dicts: Dict<number>[]): Dict<number> {
+function avgDicts(getAvg: (sum: number, count: number) => number, ...dicts: Dict<number>[]): Dict<number> {
   const summedDict: Dict<number> = {};
   const occurenceDict: Dict<number> = {};
 
@@ -176,7 +176,7 @@ export function avgDicts(getAvg: (sum: number, count: number) => number, ...dict
  *
  * @param dicts
  */
-export function getIntersectingDictKeys(...dicts: Dict<any>[]): string[] {
+function getIntersectingDictKeys(...dicts: Dict<any>[]): string[] {
   const totalDicts: number = dicts.length;
   const keyCounter: Dict<number> = {};
 
@@ -195,3 +195,22 @@ export function getIntersectingDictKeys(...dicts: Dict<any>[]): string[] {
 
   return intersectingKeys;
 }
+
+export default {
+  filterDict,
+  mutateDict,
+  copyDictRm,
+  copyDictKeep,
+  subDictScalar,
+  subScalarDict,
+  subDicts,
+  divideDictScalar,
+  divideScalarDict,
+  divideDicts,
+  sumDictScalar,
+  sumDicts,
+  multiplyDictScalar,
+  multiplyDicts,
+  avgDicts,
+  getIntersectingDictKeys,
+};

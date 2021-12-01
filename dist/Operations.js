@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getIntersectingDictKeys = exports.avgDicts = exports.multiplyDicts = exports.multiplyDictScalar = exports.sumDicts = exports.sumDictScalar = exports.divideDicts = exports.divideScalarDict = exports.divideDictScalar = exports.subDicts = exports.subScalarDict = exports.subDictScalar = exports.copyDictKeep = exports.copyDictRm = exports.mutateDict = exports.filterDict = void 0;
 // MODIFICATION OPERATIONS
 function filterDict(originalDict, conditionToPass) {
     var filteredDict = {};
@@ -11,7 +10,6 @@ function filterDict(originalDict, conditionToPass) {
     }
     return filteredDict;
 }
-exports.filterDict = filterDict;
 function mutateDict(originalDict, mutate) {
     var mutatedDict = {};
     for (var key in originalDict) {
@@ -21,26 +19,21 @@ function mutateDict(originalDict, mutate) {
     }
     return mutatedDict;
 }
-exports.mutateDict = mutateDict;
 // COPY OPERATIONS
 function copyDictRm(originalDict, blacklistKeys) {
     return filterDict(originalDict, function (key, value) { return !blacklistKeys.includes(key); });
 }
-exports.copyDictRm = copyDictRm;
 function copyDictKeep(originalDict, whitelistKeys) {
     return filterDict(originalDict, function (key, value) { return whitelistKeys.includes(key); });
 }
-exports.copyDictKeep = copyDictKeep;
 // OPERATOR OPERATIONS
 // Subtraction
 function subDictScalar(dict, scalar) {
     return mutateDict(dict, function (key, value) { return value - scalar; });
 }
-exports.subDictScalar = subDictScalar;
 function subScalarDict(scalar, dict) {
     return mutateDict(dict, function (key, value) { return scalar - value; });
 }
-exports.subScalarDict = subScalarDict;
 /**
  * Subtract subsequent Dictionaries from the first provided Dictionaries to get the sum of each key in an array of Dictionaries
  *
@@ -63,16 +56,13 @@ function subDicts() {
     }
     return minuendDict;
 }
-exports.subDicts = subDicts;
 // Division
 function divideDictScalar(dict, scalar) {
     return mutateDict(dict, function (key, value) { return value / scalar; });
 }
-exports.divideDictScalar = divideDictScalar;
 function divideScalarDict(scalar, dict) {
     return mutateDict(dict, function (key, value) { return scalar / value; });
 }
-exports.divideScalarDict = divideScalarDict;
 function divideDicts(a, b) {
     var keysToDivideOn = getIntersectingDictKeys(a, b);
     var dividedDict = {};
@@ -82,13 +72,11 @@ function divideDicts(a, b) {
     }
     return dividedDict;
 }
-exports.divideDicts = divideDicts;
 // Addition
 function sumDictScalar(dict, scalar) {
     var newDict = {};
     return mutateDict(dict, function (key, value) { return value + scalar; });
 }
-exports.sumDictScalar = sumDictScalar;
 /**
  * Add up an array of Dictionaries to get the sum of each key in an array of Dictionaries
  *
@@ -111,12 +99,10 @@ function sumDicts() {
     }
     return summedDict;
 }
-exports.sumDicts = sumDicts;
 // Multiplication
 function multiplyDictScalar(dict, scalar) {
     return mutateDict(dict, function (key, value) { return value * scalar; });
 }
-exports.multiplyDictScalar = multiplyDictScalar;
 function multiplyDicts(a, b) {
     var keysToDivideOn = getIntersectingDictKeys(a, b);
     var multipliedDict = {};
@@ -126,7 +112,6 @@ function multiplyDicts(a, b) {
     }
     return multipliedDict;
 }
-exports.multiplyDicts = multiplyDicts;
 // Other operations
 /**
  * "Add up" an array of Dictionaries, then apply some averaging export function to each key to get the (potentially weighted) "average" of each key in an array of Dictionaries
@@ -160,7 +145,6 @@ function avgDicts(getAvg) {
     }
     return avgedDict;
 }
-exports.avgDicts = avgDicts;
 // UNION AND INTERSECTION OPERATIONS
 /**
  * Given n dicts, get the keys that are present in all n dicts
@@ -190,4 +174,21 @@ function getIntersectingDictKeys() {
     }
     return intersectingKeys;
 }
-exports.getIntersectingDictKeys = getIntersectingDictKeys;
+exports.default = {
+    filterDict: filterDict,
+    mutateDict: mutateDict,
+    copyDictRm: copyDictRm,
+    copyDictKeep: copyDictKeep,
+    subDictScalar: subDictScalar,
+    subScalarDict: subScalarDict,
+    subDicts: subDicts,
+    divideDictScalar: divideDictScalar,
+    divideScalarDict: divideScalarDict,
+    divideDicts: divideDicts,
+    sumDictScalar: sumDictScalar,
+    sumDicts: sumDicts,
+    multiplyDictScalar: multiplyDictScalar,
+    multiplyDicts: multiplyDicts,
+    avgDicts: avgDicts,
+    getIntersectingDictKeys: getIntersectingDictKeys,
+};
