@@ -1,6 +1,6 @@
 {
     "name": "@asianpersonn/dict-utils",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "",
     "main": "dist/Operations.js",
     "types": "dist/Operations.d.ts",
