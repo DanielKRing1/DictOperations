@@ -196,6 +196,29 @@ function getIntersectingDictKeys(...dicts: Dict<any>[]): string[] {
   return intersectingKeys;
 }
 
+const isDict = (value: any): boolean => typeof value === 'object' && !Array.isArray(value) && value !== null;
+
+function updateRecursive (target: Dict<any>, source: Dict<any>): void {
+  Object.entries(source).forEach(([ key, newValue ]) => {
+      // Dig deeper
+      if(isDict(newValue)) {
+        updateRecursive(target[key], newValue);
+      }else target[key] = newValue;
+  });
+};
+function copyRecursive (target: Dict<any>, source: Dict<any>): Dict<any> {
+  const copy: Dict<any> = Object.assign({}, target);
+
+    Object.entries(source).forEach(([ key, newValue ]) => {
+        // Dig deeper
+        if(isDict(newValue)) {
+          copy[key] = copyRecursive(target[key], newValue);
+        }else copy[key] = newValue;
+    });
+
+    return copy;
+};
+
 export default {
   filterDict,
   mutateDict,
@@ -213,4 +236,6 @@ export default {
   multiplyDicts,
   avgDicts,
   getIntersectingDictKeys,
+  updateRecursive,
+  copyRecursive,
 };
