@@ -5,8 +5,14 @@
     "main": "dist/Operations.js",
     "types": "dist/Operations.d.ts",
     "scripts": {
+        "test": "npm run build && npx jest",
         "build": "tsc -p tsconfig-build.json",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "build:commit": "npm run commit -- \"New build\"",
+        "commit": "git add . && git commit -m ",
+        "patch": "npm version patch",
+        "push": "git push origin main",
+        "pub": "run-s build build:commit patch push pub:npm",
+        "pub:npm": "npm publish"
     },
     "repository": {
         "type": "git",
@@ -28,5 +34,7 @@
         "ts-jest": "^27.1.1",
         "typescript": "^4.5.3"
     },
-    "dependencies": {}
+    "dependencies": {
+        "npm-run-all": "^4.1.5"
+    }
 }
