@@ -1,40 +1,40 @@
 {
-    "name": "@asianpersonn/dict-utils",
-    "version": "1.0.4",
-    "description": "",
-    "main": "dist/Operations.js",
-    "types": "dist/Operations.d.ts",
-    "scripts": {
-        "test": "npm run build && npx jest",
-        "build": "tsc -p tsconfig-build.json",
-        "build:commit": "npm run commit -- \"New build\"",
-        "commit": "git add . && git commit -m ",
-        "patch": "npm version patch",
-        "push": "git push origin main",
-        "pub": "run-s build build:commit patch push pub:npm",
-        "pub:npm": "npm publish"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/DanielKRing1/DictOperations.git"
-    },
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/DanielKRing1/DictOperations/issues"
-    },
-    "homepage": "https://github.com/DanielKRing1/DictOperations#readme",
-    "keywords": [
-        "dict",
-        "dictionary"
-    ],
-    "devDependencies": {
-        "@types/jest": "^27.0.3",
-        "jest": "^27.4.4",
-        "ts-jest": "^27.1.1",
-        "typescript": "^4.5.3"
-    },
-    "dependencies": {
-        "npm-run-all": "^4.1.5"
-    }
+  "name": "@asianpersonn/dict-utils",
+  "version": "1.0.4",
+  "description": "",
+  "main": "dist/Operations.js",
+  "types": "dist/Operations.d.ts",
+  "scripts": {
+    "test": "npm run build && npx jest",
+    "build": "tsc -p tsconfig-build.json",
+    "build:commit": "npm run commit -- \"New build\"",
+    "commit": "git add . && git commit -m ",
+    "patch": "npm version patch",
+    "push": "git push origin main",
+    "pub": "run-s -c build build:commit patch push pub:npm",
+    "pub:npm": "npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanielKRing1/DictOperations.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DanielKRing1/DictOperations/issues"
+  },
+  "homepage": "https://github.com/DanielKRing1/DictOperations#readme",
+  "keywords": [
+    "dict",
+    "dictionary"
+  ],
+  "devDependencies": {
+    "@types/jest": "^27.0.3",
+    "jest": "^27.4.4",
+    "ts-jest": "^27.1.1",
+    "typescript": "^4.5.3"
+  },
+  "dependencies": {
+    "npm-run-all": "^4.1.5"
+  }
 }
