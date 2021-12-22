@@ -78,7 +78,20 @@ function divideDictScalar(dict: Dict<number>, scalar: number): Dict<number> {
 function divideScalarDict(scalar: number, dict: Dict<number>): Dict<number> {
   return mutateDict<number>(dict, (key: string, value: number) => scalar / value);
 }
+function divideScalarDictIgnore0(scalar: number, dict: Dict<number>): Dict<number> {
+  return mutateDict<number>(dict, (key: string, value: number) => value != 0 ? scalar / value : 0);
+}
 
+function divideDictsIgnore0(a: Dict<number>, b: Dict<number>): Dict<number> {
+  const keysToDivideOn: string[] = getIntersectingDictKeys(a, b);
+  const dividedDict: Dict<number> = {};
+
+  for (const key of keysToDivideOn) {
+    dividedDict[key] = b[key] != 0 ? a[key] / b[key] : 0;
+  }
+
+  return dividedDict;
+}
 function divideDicts(a: Dict<number>, b: Dict<number>): Dict<number> {
   const keysToDivideOn: string[] = getIntersectingDictKeys(a, b);
   const dividedDict: Dict<number> = {};
@@ -229,7 +242,9 @@ export default {
   subDicts,
   divideDictScalar,
   divideScalarDict,
+  divideScalarDictIgnore0,
   divideDicts,
+  divideDictsIgnore0,
   sumDictScalar,
   sumDicts,
   multiplyDictScalar,
